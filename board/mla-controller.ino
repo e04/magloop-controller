@@ -45,8 +45,7 @@ void handleRoot()
 
         server.send(200, "application/json", "{\"position\":" + String(position) + " }");
     }
-
-    if (command == "moveTo")
+    else if (command == "moveTo")
     {
         int to = constrain(server.arg(0).toInt(), MIN_MOVE_LENGTH, MAX_MOVE_LENGTH);
 
@@ -61,8 +60,7 @@ void handleRoot()
         stepper.enable();
         server.send(200, "application/json", "{\"position\":" + String(to) + " }");
     }
-
-    if (command == "move")
+    else if (command == "move")
     {
         int length = constrain(server.arg(0).toInt(), MIN_MOVE_LENGTH, MAX_MOVE_LENGTH);
 
@@ -76,8 +74,7 @@ void handleRoot()
         stepper.enable();
         server.send(200, "application/json", "{\"position\":" + String(position) + " }");
     }
-
-    if (command == "reset")
+    else if (command == "reset")
     {
         int position = 0;
         EEPROM.put<int>(0, position);
@@ -87,8 +84,10 @@ void handleRoot()
         stepper.enable();
         server.send(200, "application/json", "{\"position\":" + String(position) + " }");
     }
-
-    server.send(200, "application/json", "{\"status\":\"invalid_operation\" }");
+    else
+    {
+        server.send(200, "application/json", "{\"status\":\"invalid_operation\" }");
+    }
     EEPROM.commit();
     digitalWrite(LED_BUILTIN, 0);
 }
