@@ -36,6 +36,8 @@ void handleRoot()
 
     String command = server.argName(0);
 
+    server.sendHeader("Access-Control-Allow-Origin", "*");
+
     if (command == "position")
     {
         int position;
@@ -57,7 +59,7 @@ void handleRoot()
         stepper.disable();
         stepper.move(length);
         stepper.enable();
-        server.send(200, "application/json", "{\"position\":" + String(position) + " }");
+        server.send(200, "application/json", "{\"position\":" + String(to) + " }");
     }
 
     if (command == "move")
@@ -66,7 +68,7 @@ void handleRoot()
 
         int position;
         EEPROM.get<int>(0, position);
-        position = constrain(position + length, MIN_MOVE_LENGTH, MAX_MOVE_LENGTH);
+        position = constrain(position + length, 0, MAX_MOVE_LENGTH);
         EEPROM.put<int>(0, position);
 
         stepper.disable();
@@ -118,7 +120,6 @@ void setup(void)
 
     MDNS.begin("esp8266");
 
-    server.sendHeader("Access-Control-Allow-Origin", "*");
     server.on("/", handleRoot);
     server.onNotFound(handleNotFound);
     server.begin();
