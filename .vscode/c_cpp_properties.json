@@ -20,7 +20,6 @@
             "includePath": [
                 "/Users/a/Library/Arduino15/packages/esp8266/hardware/esp8266/3.0.2/tools/sdk/include",
                 "/Users/a/Library/Arduino15/packages/esp8266/hardware/esp8266/3.0.2/tools/sdk/lwip2/include",
-                "/Users/a/Documents/build/core",
                 "/Users/a/Library/Arduino15/packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266",
                 "/Users/a/Library/Arduino15/packages/esp8266/hardware/esp8266/3.0.2/variants/generic",
                 "/Users/a/Library/Arduino15/packages/esp8266/hardware/esp8266/3.0.2/libraries/ESP8266WiFi/src",
