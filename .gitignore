@@ -103,4 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
-board/secret.h
+secret.h
+
+web-front/dist
+web-front/rec_server_mount_point
+web-front/deploy.sh

@@ -1,8 +1,5 @@
 import { useState } from "react"
 
-const BOARD_URL = 'http://192.168.0.115/'
-export const BOARD_MAX_VALUE = 3120;
-
 const positionParser = async (response: Response) => {
     const json = await response.json()
 
@@ -12,13 +9,13 @@ const positionParser = async (response: Response) => {
     throw new Error('invalid response')
 }
 
-export const useBoardClient = () => {
+export const useMLAControllerClient = (option:{boardAddress: string}) => {
     const [position, setPosition] = useState(0);
     const [isBusy, setIsBusy] = useState(false);
 
     const reset = async () => {
         setIsBusy(true)
-        const { position } = await fetch(BOARD_URL + '?reset')
+        const { position } = await fetch(option.boardAddress + '?reset')
             .then(positionParser)
         setPosition(position)
         setIsBusy(false)
@@ -26,7 +23,7 @@ export const useBoardClient = () => {
 
     const move = async (length: number) => {
         setIsBusy(true)
-        const { position } = await fetch(BOARD_URL + '?move=' + length)
+        const { position } = await fetch(option.boardAddress + '?move=' + length)
             .then(positionParser)
         setPosition(position)
         setIsBusy(false)
@@ -34,7 +31,7 @@ export const useBoardClient = () => {
 
     const moveTo = async (toPosition: number) => {
         setIsBusy(true)
-        const { position } = await fetch(BOARD_URL + '?moveTo=' + toPosition)
+        const { position } = await fetch(option.boardAddress + '?moveTo=' + toPosition)
             .then(positionParser)
         setPosition(position)
         setIsBusy(false)
@@ -42,7 +39,7 @@ export const useBoardClient = () => {
 
     const getPosition = async () => {
         setIsBusy(true)
-        const { position } = await fetch(BOARD_URL + '?position')
+        const { position } = await fetch(option.boardAddress + '?position')
             .then(positionParser)
         setPosition(position)
         setIsBusy(false)
